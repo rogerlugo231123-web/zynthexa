@@ -16,28 +16,36 @@ body::before {
   content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   background: radial-gradient(ellipse at 10% 20%, rgba(139,92,246,0.15) 0%, transparent 50%),
     radial-gradient(ellipse at 90% 80%, rgba(0,229,255,0.12) 0%, transparent 50%);
-  z-index: 0; pointer-events: none;
+  pointer-events: none; z-index: 0;
 }
 .container { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 0 20px; }
 nav { position: fixed; top:0; left:0; right:0; background: rgba(10,1,24,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,229,255,0.2); padding: 20px 0; z-index: 1000; }
 nav .container { display:flex; justify-content:space-between; align-items:center; }
 .logo { font-family:'Exo 2',sans-serif; font-size:2rem; font-weight:900; background:linear-gradient(135deg,var(--primary),var(--secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:120px 20px; }
-.hero h1 { font-family:'Exo 2',sans-serif; font-size:4.5rem; font-weight:900; background:linear-gradient(135deg,var(--primary),var(--secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.btn-primary { padding:15px 35px; background:linear-gradient(135deg,var(--primary),var(--secondary)); color:var(--dark); border-radius:8px; font-weight:700; border:none; cursor:pointer; text-transform:uppercase; font-family:'Rajdhani'; }
+.hero h1 { font-family:'Exo 2',sans-serif; font-size:4.5rem; font-weight:900; background:linear-gradient(135deg,var(--primary),var(--secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.1; }
+.btn-primary { padding:15px 35px; background:linear-gradient(135deg,var(--primary),var(--secondary)); color:var(--dark); border-radius:8px; font-weight:700; border:none; cursor:pointer; text-transform:uppercase; font-family:'Rajdhani'; transition: 0.3s; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,229,255,0.3); }
 
-/* CHATBOT STYLES */
-#chat-toggle { position:fixed; bottom:30px; right:30px; width:65px; height:65px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--secondary)); border:none; cursor:pointer; z-index:9999; font-size:1.8rem; box-shadow: 0 0 20px var(--primary); }
-#chat-window { position:fixed; bottom:110px; right:30px; width:380px; height:550px; background:rgba(5,0,8,0.95); border:1px solid var(--primary); border-radius:20px; display:none; flex-direction:column; z-index:9998; backdrop-filter:blur(15px); }
+/* SECCIONES RECUPERADAS */
+.manifesto { padding:100px 20px; text-align:center; }
+.manifesto-text { max-width:800px; margin:0 auto; font-size:1.4rem; font-style:italic; color:rgba(240,249,255,.9); }
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; margin-top:50px; }
+.pricing-card { background:rgba(255,255,255,0.05); padding:40px; border-radius:20px; border:1px solid rgba(0,229,255,0.2); transition: 0.3s; }
+.pricing-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+
+/* CHATBOT DISEÑO FINAL */
+#chat-toggle { position:fixed; bottom:30px; right:30px; width:65px; height:65px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--secondary)); border:none; cursor:pointer; z-index:9999; font-size:1.8rem; box-shadow:0 8px 30px rgba(0,229,255,.5); }
+#chat-window { position:fixed; bottom:110px; right:30px; width:380px; height:550px; background:rgba(5,0,8,0.98); border:1px solid rgba(0,229,255,0.3); border-radius:20px; display:none; flex-direction:column; z-index:9998; backdrop-filter:blur(20px); box-shadow:0 20px 60px rgba(0,0,0,0.8); }
 #chat-window.open { display:flex; }
-.chat-header { padding:20px; border-bottom:1px solid rgba(0,229,255,0.2); display:flex; align-items:center; gap:10px; }
-.chat-messages { flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:10px; }
-.msg { max-width:85%; padding:10px 15px; border-radius:12px; margin:5px 0; }
-.msg.bot { background:rgba(139,92,246,0.2); align-self:flex-start; border-left: 3px solid var(--primary); }
-.msg.user { background:rgba(0,229,255,0.2); align-self:flex-end; border-right: 3px solid var(--secondary); }
-.chat-input-area { padding:15px; display:flex; gap:10px; }
-#chat-input { flex:1; background:rgba(255,255,255,0.1); border:1px solid var(--primary); padding:10px; color:white; border-radius:8px; outline:none; font-family:'Rajdhani'; }
-#chat-send { background:var(--primary); border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold; }
+.chat-header { padding:20px; border-bottom:1px solid rgba(0,229,255,0.15); display:flex; align-items:center; gap:12px; background:rgba(139,92,246,0.1); border-radius:20px 20px 0 0; }
+.chat-messages { flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:12px; }
+.msg { max-width:85%; padding:12px; border-radius:15px; font-size:.95rem; }
+.msg.bot { background:rgba(139,92,246,0.15); align-self:flex-start; border-left: 3px solid var(--primary); }
+.msg.user { background:rgba(0,229,255,0.15); align-self:flex-end; border-right: 3px solid var(--secondary); }
+.chat-input-area { padding:15px; border-top:1px solid rgba(0,229,255,0.15); display:flex; gap:10px; }
+#chat-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid var(--primary); border-radius:10px; padding:10px; color:white; outline:none; font-family:'Rajdhani'; }
+#chat-send { background:var(--primary); border:none; width:45px; height:45px; border-radius:10px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -45,29 +53,66 @@ nav .container { display:flex; justify-content:space-between; align-items:center
 <nav>
   <div class="container">
     <div class="logo">ZYNTHEXA</div>
-    <button class="btn-primary" onclick="toggleChat()">Asistente IA</button>
+    <div style="display:flex; gap:20px;">
+      <button class="btn-primary" style="padding:10px 20px;" onclick="toggleChat()">Asistente IA</button>
+    </div>
   </div>
 </nav>
 
 <section class="hero">
   <div class="container">
     <h1>ZYNTHEXA</h1>
-    <p style="font-size:1.5rem; margin:20px 0;">Creando el Futuro de la Humanidad</p>
+    <p style="font-size:2rem; margin:20px 0; font-weight:300;">Creando el Futuro de la Humanidad</p>
+    <p style="color:var(--accent); letter-spacing:5px; margin-bottom:40px;">UNA SOLUCIÓN A LA VEZ</p>
     <button class="btn-primary" onclick="toggleChat()">Habla con Nuestra IA</button>
   </div>
 </section>
 
+<section class="manifesto">
+  <div class="container">
+    <h2 style="font-family:'Exo 2'; font-size:3rem; color:var(--primary); margin-bottom:40px;">Nuestro Manifiesto</h2>
+    <div class="manifesto-text">
+      "No creamos IA. Creamos el <strong>futuro</strong> de la humanidad.<br>
+      Cada herramienta que construimos es una <strong>solución</strong> a un problema real.<br>
+      ZYNTHEXA no es software. Es <strong>evolución</strong>."
+    </div>
+  </div>
+</section>
+
+<section id="precios" style="padding:100px 20px;">
+  <div class="container">
+    <h2 style="text-align:center; font-family:'Exo 2'; font-size:2.8rem; color:var(--primary);">Precios con Propósito</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>GRATIS</h3>
+        <div style="font-size:3rem; font-weight:900; margin:20px 0;">$0</div>
+        <p>Para estudiantes y emprendedores.</p>
+      </div>
+      <div class="pricing-card" style="border-color:var(--primary);">
+        <h3 style="color:var(--primary);">PRO</h3>
+        <div style="font-size:3rem; font-weight:900; margin:20px 0;">$9.99</div>
+        <p>Para creadores de alto impacto.</p>
+      </div>
+      <div class="pricing-card">
+        <h3>CREATOR</h3>
+        <div style="font-size:3rem; font-weight:900; margin:20px 0;">$24.99</div>
+        <p>Para profesionales del futuro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <button id="chat-toggle" onclick="toggleChat()">💬</button>
-<div id="chat-window" id="chatWin">
+<div id="chat-window">
   <div class="chat-header">
     <div style="width:10px; height:10px; background:var(--accent); border-radius:50%;"></div>
     <span style="font-weight:bold; color:var(--primary);">ZYNTHEXA AI</span>
   </div>
   <div class="chat-messages" id="msgs">
-    <div class="msg bot">¡Conexión Exitosa! 🚀 Soy Zynthexa AI. ¿Cómo vamos a cambiar el mundo hoy?</div>
+    <div class="msg bot">¡Zynthexa AI activada! 🚀 ¿En qué puedo ayudarte a crear hoy?</div>
   </div>
   <div class="chat-input-area">
-    <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+    <input type="text" id="chat-input" placeholder="Pregunta lo que quieras...">
     <button id="chat-send" onclick="send()">➤</button>
   </div>
 </div>
@@ -75,7 +120,7 @@ nav .container { display:flex; justify-content:space-between; align-items:center
 <script>
 function toggleChat() {
   const win = document.getElementById('chat-window');
-  win.classList.toggle('open');
+  win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
 }
 
 async function send() {
@@ -98,7 +143,7 @@ async function send() {
     const reply = data.content ? data.content[0].text : "Estoy procesando tu solicitud...";
     msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
   } catch (e) {
-    msgs.innerHTML += `<div class="msg bot">Error de conexión.</div>`;
+    msgs.innerHTML += `<div class="msg bot">Error de conexión. Revisa Vercel.</div>`;
   }
   msgs.scrollTop = msgs.scrollHeight;
 }
