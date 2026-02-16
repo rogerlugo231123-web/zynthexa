@@ -1,161 +1,48 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZYNTHEXA | Future Lab</title>
-<script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID&currency=USD"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
-
-:root {
-  --bg: #020205;
-  --accent: #00f2ff;
-  --secondary: #7000ff;
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.1);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-
-/* LOGO SVG ANIMADO */
-.logo-container { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-.logo-svg { width: 40px; height: 40px; filter: drop-shadow(0 0 8px var(--accent)); }
-.logo-svg path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 100; animation: draw 3s infinite; }
-@keyframes draw { 0% { stroke-dashoffset: 100; } 50% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -100; } }
-
-/* FONDO CÓSMICO */
-.space-bg {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #020205 100%);
-    z-index: -1;
-}
-.orb {
-    position: absolute; width: 400px; height: 400px; border-radius: 50%;
-    background: var(--secondary); filter: blur(150px); opacity: 0.2;
-    animation: float 10s infinite alternate;
-}
-@keyframes float { from { transform: translate(0,0); } to { transform: translate(100px, 50px); } }
-
-/* NAVBAR */
-nav {
-    position: fixed; top: 0; width: 100%; padding: 20px 5%;
-    display: flex; justify-content: space-between; align-items: center;
-    backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border);
-}
-
-/* HERO SECTION */
-.hero {
-    height: 100vh; display: flex; flex-direction: column; 
-    justify-content: center; align-items: center; text-align: center;
-}
-.hero h1 {
-    font-size: clamp(3rem, 10vw, 6rem); font-weight: 800;
-    letter-spacing: -2px; line-height: 0.9; margin-bottom: 20px;
-    background: linear-gradient(to bottom, #fff, #444);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-
-/* TOOLS 3D CARDS */
-.tools-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px; padding: 100px 8%; perspective: 1000px;
-}
-.tool-card {
-    background: var(--glass); border: 1px solid var(--border);
-    padding: 50px; border-radius: 40px; transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    transform-style: preserve-3d; backdrop-filter: blur(10px);
-}
-.tool-card:hover {
-    transform: rotateX(10deg) rotateY(-10deg) translateY(-20px);
-    border-color: var(--accent); box-shadow: 0 0 40px rgba(0, 242, 255, 0.2);
-}
-.tool-card * { transform: translateZ(30px); }
-
-/* BOTÓN PAYPAL */
-#paypal-container { margin-top: 50px; background: white; padding: 20px; border-radius: 20px; display: none; }
-
-/* CHAT FLOATING */
-.chat-trigger {
-    position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px;
-    background: linear-gradient(135deg, var(--accent), var(--secondary));
-    border-radius: 50%; border: none; cursor: pointer; z-index: 2000;
-    box-shadow: 0 10px 30px rgba(0,242,255,0.4); font-size: 1.5rem;
-}
-</style>
-</head>
-<body>
-
-<div class="space-bg"><div class="orb"></div></div>
-
-<nav>
-    <div class="logo-container">
-        <svg class="logo-svg" viewBox="0 0 50 50">
-            <path d="M10 10 L40 10 L10 40 L40 40" stroke-linecap="round"/>
-        </svg>
-        <div style="font-weight:800; font-size:1.4rem;">ZYNTHEXA</div>
+<div id="viral-boost" style="margin: 40px 5%; padding: 30px; background: linear-gradient(90deg, rgba(112,0,255,0.1), rgba(0,242,255,0.1)); border: 1px dashed var(--accent); border-radius: 25px; text-align: center;">
+    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">¿Necesitas más créditos? 🚀</h3>
+    <p style="color: #aaa; margin-bottom: 20px;">Comparte ZYNTHEXA en tus redes y desbloquea 1 creación profesional gratis al instante.</p>
+    
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <button onclick="shareAndReward('TikTok')" style="background: #000; color: #fff; border: 1px solid #fff; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 800;">
+            <span>📱</span> Compartir en TikTok
+        </button>
+        <button onclick="shareAndReward('WhatsApp')" style="background: #25D366; color: #fff; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 800;">
+            <span>💬</span> Enviar a WhatsApp
+        </button>
     </div>
-    <button onclick="showPricing()" style="background:var(--accent); color:#000; border:none; padding:10px 20px; border-radius:50px; font-weight:800; cursor:pointer;">PRO ACCESS</button>
-</nav>
-
-<section class="hero">
-    <h1>REDEFINE <br> REALITY.</h1>
-    <p style="color:#888; max-width:600px; margin-bottom:30px;">ZYNTHEXA es la navaja suiza de la nueva era digital. Sin procesos, sin fricción, solo resultados virales.</p>
-    <button onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})" style="padding:15px 40px; border-radius:50px; border:1px solid #fff; background:none; color:#fff; font-weight:800; cursor:pointer;">Explorar Laboratorio</button>
-</section>
-
-<section id="explore" class="tools-grid">
-    <div class="tool-card" onclick="showPricing()">
-        <div style="font-size:3rem; margin-bottom:20px;">⚡</div>
-        <h3>Ultra Speed</h3>
-        <p>Genera contenido para 7 plataformas en menos de 30 segundos.</p>
-    </div>
-    <div class="tool-card" onclick="showPricing()">
-        <div style="font-size:3rem; margin-bottom:20px;">💎</div>
-        <h3>Pro Quality</h3>
-        <p>Resolución 4K y audio espacial para marcar la diferencia.</p>
-    </div>
-    <div class="tool-card" onclick="showPricing()">
-        <div style="font-size:3rem; margin-bottom:20px;">🚀</div>
-        <h3>Viral AI</h3>
-        <p>Nuestra IA predice qué contenido tiene más éxito en el algoritmo.</p>
-    </div>
-</section>
-
-<div id="pricing-section" style="text-align:center; padding:100px 5%; display:none;">
-    <h2 style="font-size:3rem;">Suscripción 50/50</h2>
-    <p>Apoya el desarrollo y obtén acceso total ilimitado.</p>
-    <div id="paypal-container"></div>
 </div>
 
-<button class="chat-trigger" onclick="toggleChat()">💬</button>
-
 <script>
-function showPricing() {
-    document.getElementById('pricing-section').style.display = 'block';
-    document.getElementById('paypal-container').style.display = 'inline-block';
-    document.getElementById('pricing-section').scrollIntoView({behavior:'smooth'});
-    
-    // Solo renderizar si no existe
-    if (document.getElementById('paypal-container').innerHTML === "") {
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({ purchase_units: [{ amount: { value: '9.99' } }] });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('¡Socio, gracias por unirte! ' + details.payer.name.given_name);
-                });
-            }
-        }).render('#paypal-container');
+// LÓGICA DE RECOMPENSA (Socio, esto suma puntos en el Admin)
+let sharedCount = localStorage.getItem('shared_count') || 0;
+
+function shareAndReward(platform) {
+    const shareText = "¡Mira esta IA increíble! Estoy creando contenido viral en segundos con ZYNTHEXA. Pruébala aquí: " + window.location.href;
+    const url = platform === 'TikTok' 
+        ? `https://www.tiktok.com/` // TikTok no permite compartir por URL directa igual que WA, así que redirigimos
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+
+    window.open(url, '_blank');
+
+    // Simulación de recompensa
+    setTimeout(() => {
+        sharedCount++;
+        localStorage.setItem('shared_count', sharedCount);
+        
+        // Actualizamos el Admin Log
+        if(typeof addLog === "function") {
+            addLog(`Usuario compartió en ${platform}. Crédito otorgado.`);
+        }
+        
+        alert("¡Gracias por compartir, socio! Hemos desbloqueado 1 crédito de creación en tu cuenta.");
+    }, 2000);
+}
+
+// Actualizar el Admin Panel para ver cuántos han compartido
+function updateAdminViralStats() {
+    const adminLogs = document.getElementById('admin-logs');
+    if(adminLogs) {
+        addLog(`Total de compartidos acumulados: ${sharedCount}`);
     }
 }
-
-function toggleChat() {
-    // Aquí puedes abrir tu ventana de chat
-    alert("ZYNTHEXA AI: Iniciando conexión...");
-}
 </script>
-</body>
-</html>
