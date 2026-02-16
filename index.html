@@ -1,48 +1,27 @@
-<div id="viral-boost" style="margin: 40px 5%; padding: 30px; background: linear-gradient(90deg, rgba(112,0,255,0.1), rgba(0,242,255,0.1)); border: 1px dashed var(--accent); border-radius: 25px; text-align: center;">
-    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">¿Necesitas más créditos? 🚀</h3>
-    <p style="color: #aaa; margin-bottom: 20px;">Comparte ZYNTHEXA en tus redes y desbloquea 1 creación profesional gratis al instante.</p>
-    
-    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <button onclick="shareAndReward('TikTok')" style="background: #000; color: #fff; border: 1px solid #fff; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 800;">
-            <span>📱</span> Compartir en TikTok
-        </button>
-        <button onclick="shareAndReward('WhatsApp')" style="background: #25D366; color: #fff; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 800;">
-            <span>💬</span> Enviar a WhatsApp
-        </button>
-    </div>
-</div>
-
-<script>
-// LÓGICA DE RECOMPENSA (Socio, esto suma puntos en el Admin)
-let sharedCount = localStorage.getItem('shared_count') || 0;
-
 function shareAndReward(platform) {
-    const shareText = "¡Mira esta IA increíble! Estoy creando contenido viral en segundos con ZYNTHEXA. Pruébala aquí: " + window.location.href;
+    // Mensaje ultra-atrapante
+    const shareText = "🔥 Acabo de descubrir ZYNTHEXA. Esta IA está creando mis videos de TikTok en segundos y la calidad es de otro planeta. 🚀 Pruébala antes de que sea privada aquí: " + window.location.href;
+    
     const url = platform === 'TikTok' 
-        ? `https://www.tiktok.com/` // TikTok no permite compartir por URL directa igual que WA, así que redirigimos
+        ? `https://www.tiktok.com/upload` // Redirige a subir para que usen nuestro Hype
         : `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
 
     window.open(url, '_blank');
 
-    // Simulación de recompensa
+    // Registro en nuestra consola de socios
     setTimeout(() => {
         sharedCount++;
         localStorage.setItem('shared_count', sharedCount);
         
-        // Actualizamos el Admin Log
         if(typeof addLog === "function") {
-            addLog(`Usuario compartió en ${platform}. Crédito otorgado.`);
+            addLog(`Socio: Alguien compartió en ${platform}. Viralidad +1`);
         }
         
-        alert("¡Gracias por compartir, socio! Hemos desbloqueado 1 crédito de creación en tu cuenta.");
+        // Efecto visual de éxito
+        const notify = document.createElement('div');
+        notify.innerHTML = "¡CRÉDITO DESBLOQUEADO! 🚀";
+        notify.style = "position:fixed; top:20px; right:20px; background:var(--accent); color:#000; padding:15px; border-radius:10px; font-weight:800; z-index:10000; animation: fadeInUp 0.5s;";
+        document.body.appendChild(notify);
+        setTimeout(() => notify.remove(), 3000);
     }, 2000);
 }
-
-// Actualizar el Admin Panel para ver cuántos han compartido
-function updateAdminViralStats() {
-    const adminLogs = document.getElementById('admin-logs');
-    if(adminLogs) {
-        addLog(`Total de compartidos acumulados: ${sharedCount}`);
-    }
-}
-</script>
