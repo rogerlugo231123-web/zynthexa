@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZYNTHEXA | Sovereignty in Creation</title>
+    <title>ZYNTHEXA | Soberanía Digital</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Outfit:wght@200;400;600&display=swap');
 
         :root {
             --gold: #d4af37;
             --deep: #0a0a0c;
-            --accent: #ffffff;
-            --panel: rgba(20, 20, 25, 0.8);
-            --border: rgba(212, 175, 55, 0.2);
+            --panel: rgba(20, 20, 25, 0.9);
+            --border: rgba(212, 175, 55, 0.3);
         }
 
+        /* Reset para evitar que las letras se muevan solas */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
             font-family: 'Outfit', sans-serif; 
             background: var(--deep); 
@@ -23,76 +24,112 @@
             overflow-x: hidden;
         }
 
-        /* Identidad Visual Propia: Fondo de Partículas de Oro */
+        /* FONDO ESTÁTICO */
         #bg-vault {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at top right, #1a1a1e 0%, #0a0a0c 100%);
         }
 
-        /* Header Minimalista y Elegante */
+        /* NAVEGACIÓN CORREGIDA (No molesta al contenido) */
         nav { 
-            position: fixed; width: 100%; padding: 30px 5%; 
-            display: flex; justify-content: space-between; align-items: center; 
-            z-index: 1000; mix-blend-mode: difference;
+            position: sticky; /* Cambiado de fixed a sticky para que no flote sobre todo */
+            top: 0;
+            width: 100%; 
+            padding: 20px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(10, 10, 12, 0.95);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
         }
-        .brand { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); }
-
-        /* HERO: El Manifiesto de ZYNTHEXA */
-        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 10%; }
-        .hero h1 { font-family: 'Syncopate'; font-size: clamp(2rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
-        .hero p { max-width: 500px; font-weight: 200; font-size: 1.2rem; opacity: 0.7; border-left: 2px solid var(--gold); padding-left: 20px; }
-
-        /* EL CENTRO DE MANDO (Tus Motores Propios) */
-        .vault-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 40px; padding: 100px 10%; 
-        }
-        .vault-card { 
-            background: var(--panel); border: 1px solid var(--border); 
-            padding: 40px; border-radius: 0px; /* Estilo cuadrado para verse más industrial/lujo */
-            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .vault-card:hover { border-color: var(--gold); transform: translateY(-10px); background: #141417; }
         
-        .engine-label { font-size: 0.7rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .brand { 
+            font-family: 'Syncopate', sans-serif; 
+            font-weight: 700; 
+            font-size: 1.5rem; 
+            letter-spacing: 5px; 
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* HERO SECTION */
+        .hero { 
+            min-height: 60vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 60px 10%; 
+        }
+        .hero h1 { font-family: 'Syncopate'; font-size: clamp(2rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 20px; }
+
+        /* GRID DE MOTORES - CORREGIDO */
+        .vault-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 30px; 
+            padding: 40px 10%; 
+            position: relative;
+            z-index: 10; /* Asegura que esté debajo del nav al subir */
+        }
+
+        .vault-card { 
+            background: var(--panel); 
+            border: 1px solid var(--border); 
+            padding: 30px; 
+            border-radius: 4px;
+            transition: 0.3s ease;
+        }
+
+        .engine-label { font-size: 0.65rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; display: block; }
         
         .output-screen { 
             width: 100%; height: 250px; background: #000; margin: 20px 0;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
         }
+        .output-screen img, .output-screen video { width: 100%; height: 100%; object-fit: cover; }
 
         .input-prompt {
             width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
-            padding: 15px 0; color: #fff; font-family: 'Outfit'; font-size: 1rem;
-            margin-bottom: 20px; outline: none; transition: 0.3s;
+            padding: 12px 0; color: #fff; font-family: 'Outfit'; font-size: 1rem;
+            margin-bottom: 20px; outline: none;
         }
-        .input-prompt:focus { border-bottom-color: var(--gold); }
 
-        /* El Botón de Acción */
         .btn-action {
             background: transparent; border: 1px solid var(--gold); color: var(--gold);
-            padding: 15px 30px; cursor: pointer; font-family: 'Syncopate'; font-size: 0.7rem;
-            transition: 0.3s; width: 100%;
+            padding: 12px; cursor: pointer; font-family: 'Syncopate'; font-size: 0.7rem;
+            transition: 0.3s; width: 100%; text-transform: uppercase;
         }
-        .btn-action:hover { background: var(--gold); color: #000; font-weight: 700; }
+        .btn-action:hover { background: var(--gold); color: #000; }
 
-        /* SECCIÓN: MIS CREACIONES (La Galería que pediste) */
-        #creations { padding: 50px 10%; }
-        .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 30px; }
-        .gallery-item { height: 150px; background: var(--panel); border: 1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size: 0.6rem; opacity: 0.5;}
+        /* GALERÍA DE CREACIONES */
+        #creations { padding: 80px 10%; }
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 15px; 
+            margin-top: 30px; 
+        }
+        .gallery-item { 
+            height: 120px; background: var(--panel); border: 1px solid var(--border); 
+            display:flex; align-items:center; justify-content:center; 
+            font-size: 0.7rem; text-align: center; padding: 10px;
+        }
 
-        /* ASISTENTE PROPIO: "THE ORACLE" */
+        /* ORÁCULO FLOTANTE (No interfiere con el scroll) */
         #oracle-ui {
-            position: fixed; bottom: 0; right: 50px; width: 350px; height: 500px;
+            position: fixed; bottom: 100px; right: 30px; width: 320px; height: 450px;
             background: #0d0d0f; border: 1px solid var(--gold); display: none;
-            flex-direction: column; z-index: 2000; box-shadow: 0 -20px 50px rgba(0,0,0,0.8);
+            flex-direction: column; z-index: 3000;
         }
         #oracle-trigger {
-            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
             border: 1px solid var(--gold); display: flex; align-items: center;
-            justify-content: center; cursor: pointer; z-index: 2001; background: var(--deep);
-            color: var(--gold); font-family: 'Syncopate'; font-size: 0.6rem;
+            justify-content: center; cursor: pointer; z-index: 3001; background: var(--deep);
+            color: var(--gold); font-family: 'Syncopate'; font-size: 0.8rem;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
     </style>
 </head>
@@ -101,91 +138,90 @@
     <div id="bg-vault"></div>
 
     <nav>
-        <div class="brand">ZYNTHEXA</div>
-        <div style="font-size: 0.7rem; letter-spacing: 2px;">FE • PODER • SÍNTESIS</div>
+        <a href="#" class="brand">ZYNTHEXA</a>
+        <div style="font-size: 0.6rem; letter-spacing: 3px; color: var(--gold);">MODO_ACTIVO_2026</div>
     </nav>
 
     <section class="hero">
-        <span style="color: var(--gold); margin-bottom: 10px; letter-spacing: 5px;">ESTÁNDAR 2026</span>
-        <h1>TU VOLUNTAD<br>DIGITALIZADA.</h1>
-        <p>ZYNTHEXA no es un asistente. Es el motor soberano que transmuta tus ideas en activos visuales de alto valor.</p>
+        <span class="engine-label">Protocolo de Manifestación</span>
+        <h1>TRANSFORMA<br>LA IDEA EN MATERIA.</h1>
     </section>
 
     <div class="vault-grid">
         <div class="vault-card">
-            <span class="engine-label">CORE: ETHER-VIDEO</span>
-            <h3>MANIFIESTO VISUAL</h3>
+            <span class="engine-label">ETHER-VIDEO (VEO CORE)</span>
+            <h3>CINEMÁTICA IA</h3>
             <div class="output-screen" id="out-video">
-                <span style="opacity:0.3; font-size: 0.7rem;">ESPERANDO SECUENCIA...</span>
+                <span style="opacity:0.3; font-size: 0.7rem;">SISTEMA LISTO...</span>
             </div>
-            <input type="text" class="input-prompt" id="p-video" placeholder="Define la atmósfera...">
-            <button class="btn-action" onclick="activate('video')">EJECUTAR SÍNTESIS</button>
+            <input type="text" class="input-prompt" id="p-video" placeholder="Tu visión cinemática...">
+            <button class="btn-action" onclick="activate('video')">GENERAR VIDEO</button>
         </div>
 
         <div class="vault-card">
-            <span class="engine-label">CORE: AURA-IMAGE</span>
-            <h3>RETRATO DE REALIDAD</h3>
+            <span class="engine-label">AURA-IMAGE (NANO CORE)</span>
+            <h3>VISUALIZACIÓN HD</h3>
             <div class="output-screen" id="out-image">
-                <span style="opacity:0.3; font-size: 0.7rem;">ESPERANDO COMPOSICIÓN...</span>
+                <span style="opacity:0.3; font-size: 0.7rem;">SISTEMA LISTO...</span>
             </div>
-            <input type="text" class="input-prompt" id="p-image" placeholder="Describe la forma...">
-            <button class="btn-action" onclick="activate('image')">MATERIALIZAR</button>
+            <input type="text" class="input-prompt" id="p-image" placeholder="Tu visión artística...">
+            <button class="btn-action" onclick="activate('image')">GENERAR IMAGEN</button>
         </div>
     </div>
 
     <section id="creations">
-        <span class="engine-label">ARCHIVO DE PROPIEDAD</span>
-        <h2 style="font-family: 'Syncopate'; font-size: 1.5rem;">MIS MANIFESTACIONES</h2>
+        <span class="engine-label">Vault de Salida</span>
+        <h2 style="font-family: 'Syncopate'; font-size: 1.2rem; margin-top: 10px;">MIS MANIFESTACIONES</h2>
         <div class="gallery" id="gallery-box">
-            <div class="gallery-item">ARCHIVO_001.MP4</div>
-            <div class="gallery-item">ARCHIVO_002.PNG</div>
-            <div class="gallery-item">ARCHIVO_003.MP4</div>
-            <div class="gallery-item">VACÍO</div>
+            <div class="gallery-item" style="opacity: 0.3;">SIN REGISTROS</div>
         </div>
     </section>
 
     <div id="oracle-ui">
-        <div style="padding:20px; border-bottom:1px solid var(--gold); font-family:'Syncopate'; font-size:0.7rem; color:var(--gold);">ORACLE_Z</div>
-        <div id="chat-logs" style="flex:1; padding:20px; overflow-y:auto; font-size:0.8rem; font-weight:200;">
-            Sistemas ZYNTHEXA activos. Tu visión es nuestra única ley.
+        <div style="padding:15px; border-bottom:1px solid var(--gold); font-family:'Syncopate'; font-size:0.6rem;">Z_ORACLE_LOG</div>
+        <div id="chat-logs" style="flex:1; padding:15px; overflow-y:auto; font-size:0.8rem; line-height:1.4;">
+            <div style="color:var(--gold); margin-bottom:10px;">> ZYNTHEXA: Conexión establecida. Esperando comandos de creación.</div>
         </div>
-        <div style="padding:20px; display:flex;">
-            <input type="text" id="chat-in" placeholder="Comando..." style="flex:1; background:transparent; border:none; border-bottom:1px solid var(--gold); color:#fff; outline:none;">
-            <button onclick="talk()" style="background:transparent; color:var(--gold); border:none; margin-left:10px; cursor:pointer;">>>></button>
+        <div style="padding:15px; display:flex; border-top:1px solid rgba(212,175,55,0.1);">
+            <input type="text" id="chat-in" placeholder="Pregunta al núcleo..." style="flex:1; background:transparent; border:none; color:#fff; outline:none;">
+            <button onclick="talk()" style="background:transparent; color:var(--gold); border:none; cursor:pointer; font-weight:bold;">></button>
         </div>
     </div>
     <div id="oracle-trigger" onclick="toggleOracle()">Z_</div>
 
     <script>
-        // Función de Activación de Motores Propios
+        // Lógica de Generación Activa
         function activate(type) {
             const prompt = document.getElementById('p-' + type).value;
             const screen = document.getElementById('out-' + type);
             const gallery = document.getElementById('gallery-box');
 
-            if(!prompt) return;
+            if(!prompt) {
+                alert("Debes ingresar una intención para el motor.");
+                return;
+            }
 
-            screen.innerHTML = `<span style="color:var(--gold); font-size:0.7rem;">TRANSFORMANDO MATERIA...</span>`;
+            screen.innerHTML = `<span style="color:var(--gold); font-size:0.7rem; animation: pulse 1s infinite;">SINTONIZANDO FRECUENCIAS...</span>`;
             
             setTimeout(() => {
                 if(type === 'video') {
-                    screen.innerHTML = `<video autoplay loop muted style="width:100%"><source src="https://assets.mixkit.co/videos/preview/mixkit-top-view-of-a-blue-swirling-ocean-4424-large.mp4" type="video/mp4"></video>`;
+                    screen.innerHTML = `<video autoplay loop muted><source src="https://assets.mixkit.co/videos/preview/mixkit-flying-over-the-clouds-23640-large.mp4" type="video/mp4"></video>`;
                 } else {
-                    screen.innerHTML = `<img src="https://picsum.photos/600/400?grayscale&sig=${Math.random()}" style="width:100%">`;
+                    screen.innerHTML = `<img src="https://picsum.photos/600/400?sig=${Math.random()}">`;
                 }
                 
-                // Añadir a la galería de "Mis Creaciones"
-                const newItem = document.createElement('div');
-                newItem.className = 'gallery-item';
-                newItem.style.opacity = "1";
-                newItem.style.borderColor = "var(--gold)";
-                newItem.innerHTML = `<a href="#" style="color:var(--gold); text-decoration:none;">DESCARGAR_${type.toUpperCase()}</a>`;
-                gallery.prepend(newItem);
+                // Actualizar Galería de Descargas
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.style.border = '1px solid var(--gold)';
+                div.innerHTML = `<a href="#" style="color:var(--gold); text-decoration:none; font-weight:bold;">↓ DESCARGAR ${type.toUpperCase()}</a>`;
+                gallery.prepend(div);
 
-                alert("SÍNTESIS COMPLETADA. El archivo ha sido depositado en tu archivo de propiedad.");
-            }, 3000);
+                alert("SÍNTESIS EXITOSA. El archivo ha sido depositado en tu bóveda.");
+            }, 2500);
         }
 
+        // Lógica del Chat
         function toggleOracle() {
             const ui = document.getElementById('oracle-ui');
             ui.style.display = (ui.style.display === 'flex') ? 'none' : 'flex';
@@ -196,17 +232,22 @@
             const logs = document.getElementById('chat-logs');
             if(!input.value) return;
 
-            logs.innerHTML += `<div style="margin-top:15px; color:var(--gold);">>> USER: ${input.value}</div>`;
-            const val = input.value.toLowerCase();
+            logs.innerHTML += `<div style="margin-top:10px; opacity:0.6;">> USER: ${input.value}</div>`;
+            const msg = input.value.toLowerCase();
             input.value = "";
 
             setTimeout(() => {
-                let r = "Analizando flujos de datos... Tu solicitud está siendo procesada por el núcleo Z.";
-                if(val.includes("hola")) r = "Bienvenido a la soberanía digital, Visionario.";
-                logs.innerHTML += `<div style="margin-top:10px; opacity:0.6;">>> ZYNTHEXA: ${r}</div>`;
+                let r = "Procesando en el núcleo cuántico ZYNTHEXA...";
+                if(msg.includes("hola")) r = "Saludos, Visionario. ¿Qué realidad vamos a codificar hoy?";
+                if(msg.includes("precio")) r = "El acceso al nivel Soberano es de $24.99. La abundancia es tu derecho.";
+                logs.innerHTML += `<div style="margin-top:5px; color:var(--gold);">> ZYNTHEXA: ${r}</div>`;
                 logs.scrollTop = logs.scrollHeight;
-            }, 800);
+            }, 600);
         }
     </script>
+
+    <style>
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+    </style>
 </body>
 </html>
