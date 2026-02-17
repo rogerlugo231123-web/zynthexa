@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+n class="btn-m<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZYNTHEXA | Inteligencia y Abundancia</title>
+    <title>ZYNTHEXA | El Ecosistema Creativo del 2026</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600;900&family=Rajdhani:wght@300;500;700&display=swap');
 
@@ -20,48 +20,38 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Rajdhani', sans-serif; background: var(--dark); color: #fff; overflow-x: hidden; }
 
-        /* Background */
+        /* Fondo */
         #bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at center, #0a0118 0%, #020005 100%); }
 
         /* Navegación */
         nav { position: fixed; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); z-index: 1000; }
         .logo { font-family: 'Exo 2'; font-weight: 900; font-size: 2rem; color: var(--primary); text-decoration: none; }
 
-        /* Secciones */
-        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; }
+        /* Layout General */
+        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .glow-text { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Exo 2'; font-weight: 900; }
 
-        /* FAQ Estilo Acordeón */
-        .faq-item { background: var(--glass); border: 1px solid var(--border); margin-bottom: 15px; border-radius: 15px; overflow: hidden; transition: 0.3s; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem; }
-        .faq-question:hover { background: rgba(0, 229, 255, 0.1); }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; opacity: 0.8; line-height: 1.6; }
-        .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px 20px; }
-        .faq-item.active { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 229, 255, 0.1); }
+        /* GENERADORES IA */
+        .creator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
+        .generator-card { background: var(--glass); border: 1px solid var(--border); border-radius: 25px; padding: 30px; backdrop-filter: blur(10px); transition: 0.4s; }
+        .generator-card:hover { border-color: var(--primary); }
+        .preview-box { width: 100%; height: 200px; background: rgba(0,0,0,0.3); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); color: var(--primary); overflow: hidden; }
+        .input-prompt { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; margin-bottom: 15px; font-family: 'Rajdhani'; outline: none; resize: none; }
+
+        /* FAQ */
+        .faq-item { background: var(--glass); border: 1px solid var(--border); margin-bottom: 10px; border-radius: 12px; }
+        .faq-question { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; }
+        .faq-answer { padding: 0 15px; max-height: 0; overflow: hidden; transition: 0.3s; opacity: 0.8; }
+        .faq-item.active .faq-answer { max-height: 100px; padding-bottom: 15px; }
 
         /* Botones */
-        .btn-main { padding: 15px 40px; border-radius: 50px; border: none; background: linear-gradient(45deg, var(--primary), var(--secondary)); color: var(--dark); font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary); }
+        .btn-main { padding: 12px 30px; border-radius: 50px; border: none; background: linear-gradient(45deg, var(--primary), var(--secondary)); color: var(--dark); font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
 
-        /* Chat Gemini */
-        #chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 450px; background: rgba(5, 0, 10, 0.95); border: 1px solid var(--primary); border-radius: 20px; display: none; flex-direction: column; z-index: 10001; box-shadow: 0 10px 40px rgba(0,0,0,0.8); backdrop-filter: blur(20px); }
-        .chat-header { padding: 15px; border-bottom: 1px solid var(--border); font-weight: 700; display: flex; justify-content: space-between; }
-        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-input-area { padding: 15px; display: flex; gap: 10px; }
-        .chat-input-area input { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: white; padding: 10px; border-radius: 10px; outline: none; }
-        .msg { padding: 10px; border-radius: 10px; max-width: 80%; font-size: 0.9rem; }
-        .msg-ai { background: rgba(139, 92, 246, 0.3); align-self: flex-start; }
-        .msg-user { background: var(--primary); color: var(--dark); align-self: flex-end; }
+        /* Chat */
+        #chat-window { position: fixed; bottom: 100px; right: 30px; width: 320px; height: 400px; background: rgba(5, 0, 10, 0.98); border: 1px solid var(--primary); border-radius: 20px; display: none; flex-direction: column; z-index: 10001; }
         #chat-trigger { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10001; font-size: 1.5rem; box-shadow: 0 0 20px var(--primary); }
-
-        /* Footer */
-        footer { padding: 50px; text-align: center; border-top: 1px solid var(--border); }
-        .socials a { color: var(--primary); text-decoration: none; margin: 0 10px; transition: 0.3s; }
-        .socials a:hover { color: white; }
-
-        /* Modal Pago */
-        #payment-modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:20000; }
     </style>
 </head>
 <body>
@@ -70,118 +60,105 @@
 
     <nav>
         <a href="#" class="logo">ZYNTHEXA</a>
-        <button class="btn-main" style="padding: 10px 20px; font-size: 0.8rem;" onclick="togglePayment()">Portal Elite</button>
+        <button class="btn-main" onclick="togglePayment()" style="font-size: 0.8rem;">Suscribirse con Fe</button>
     </nav>
 
     <section class="hero">
-        <h1 class="glow-text" style="font-size: 4rem;">SINTONIZA TU ÉXITO</h1>
-        <p style="margin: 20px 0; font-size: 1.2rem; opacity: 0.8;">La primera IA diseñada para materializar visiones humanas en marzo de 2026.</p>
-        <button class="btn-main" onclick="document.getElementById('faq').scrollIntoView()">Preguntas del Futuro</button>
+        <h1 class="glow-text" style="font-size: 4rem;">EL NÚCLEO CREATIVO</h1>
+        <p style="font-size: 1.2rem; opacity: 0.8;">Materializa videos y arte con el poder de Gemini 2026.</p>
+        <div style="margin-top: 30px; display: flex; gap: 15px;">
+            <button class="btn-main" onclick="document.getElementById('lab').scrollIntoView()">Ir al Laboratorio</button>
+            <button class="btn-main" style="background: transparent; border: 1px solid var(--primary); color: white;" onclick="document.getElementById('faq').scrollIntoView()">Ver FAQ</button>
+        </div>
+    </section>
+
+    <section id="lab">
+        <h2 style="text-align: center; font-family: 'Exo 2'; margin-bottom: 40px;">Laboratorio de Manifestación Visual</h2>
+        <div class="creator-grid">
+            <div class="generator-card">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">🎬 Vision Flow (Video)</h3>
+                <div class="preview-box" id="vid-prev">Esperando prompt de video...</div>
+                <textarea class="input-prompt" id="vid-prompt" rows="3" placeholder="Describe la escena de tus sueños..."></textarea>
+                <button class="btn-main" style="width: 100%;" onclick="runGen('vid')">Generar Video</button>
+            </div>
+            <div class="generator-card">
+                <h3 style="color: var(--secondary); margin-bottom: 15px;">🖼️ Nexus Art (Imagen)</h3>
+                <div class="preview-box" id="img-prev">Esperando prompt de imagen...</div>
+                <input type="text" class="input-prompt" id="img-prompt" placeholder="Ej: Paisaje galáctico en 8k...">
+                <button class="btn-main" style="width: 100%;" onclick="runGen('img')">Generar Imagen</button>
+            </div>
+        </div>
     </section>
 
     <section id="faq">
-        <h2 style="text-align: center; margin-bottom: 40px; font-family: 'Exo 2';">Claridad Cuántica (FAQ)</h2>
-        
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">¿Qué es ZYNTHEXA exactamente? <span>+</span></div>
-            <div class="faq-answer">ZYNTHEXA es un ecosistema de Inteligencia Artificial Generativa que funciona bajo la premisa de la co-creación. No solo genera datos, sino que amplifica tu intención creativa para resultados exponenciales.</div>
+        <h2 style="text-align: center; margin-bottom: 40px; font-family: 'Exo 2';">Preguntas Frecuentes</h2>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">¿Los videos son en alta resolución? <span>+</span></div>
+            <div class="faq-answer">Sí, el motor Vision Flow entrega resultados en 4K optimizados para la era del 2026.</div>
         </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">¿Es seguro realizar mi compra online hoy? <span>+</span></div>
-            <div class="faq-answer">Totalmente. Nuestras transacciones están protegidas por encriptación de grado militar y, lo más importante, alineadas con la energía de la abundancia. Lo que das con fe, vuelve multiplicado.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">¿Puedo usar ZYNTHEXA para mi negocio actual? <span>+</span></div>
-            <div class="faq-answer">Sí. ZYNTHEXA está diseñada para adaptarse a cualquier visión: desde marcas personales hasta corporaciones que buscan una comunicación más humana y vibrante.</div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">¿Por qué marzo de 2026? <span>+</span></div>
-            <div class="faq-answer">Es el momento de la gran convergencia tecnológica. Al unirte ahora, aseguras tu posición como pionero en la nueva era de la conciencia digital.</div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-question">¿Cómo funciona la suscripción? <span>+</span></div>
+            <div class="faq-answer">Al suscribirte con fe, desbloqueas generaciones ilimitadas y soporte prioritario del Nexo.</div>
         </div>
     </section>
 
     <div id="chat-window">
-        <div class="chat-header">
+        <div style="padding: 15px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
             <span>NEXO GEMINI</span>
             <span onclick="toggleChat()" style="cursor:pointer;">×</span>
         </div>
-        <div class="chat-messages" id="chat-content">
-            <div class="msg msg-ai">Visionario, soy el Nexo. ¿Quieres saber cómo ZYNTHEXA materializará tu visión?</div>
+        <div id="chat-box" style="flex:1; padding: 15px; overflow-y: auto; font-size: 0.9rem;">
+            <div style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 10px;">Hola, soy tu asistente de ZYNTHEXA. ¿Qué vamos a manifestar hoy?</div>
         </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Escribe tu duda aquí...">
-            <button onclick="sendChatMsg()" style="background:var(--primary); border:none; border-radius:5px; padding:0 15px; cursor:pointer; font-weight:bold;">↑</button>
+        <div style="padding: 10px; display: flex; gap: 5px;">
+            <input type="text" id="chat-in" placeholder="Escribe..." style="flex:1; background: transparent; border: 1px solid var(--border); color: white; padding: 5px; border-radius: 5px;">
+            <button onclick="chat()" style="background: var(--primary); border: none; border-radius: 5px; padding: 5px 10px;">↑</button>
         </div>
     </div>
     <div id="chat-trigger" onclick="toggleChat()">✨</div>
 
-    <div id="payment-modal">
-        <div style="background: #0f011d; padding: 40px; border-radius: 20px; border: 1px solid var(--primary); width: 90%; max-width: 400px; text-align: center;">
-            <h2 style="color: var(--primary); margin-bottom: 20px;">Portal de Abundancia</h2>
-            <input type="text" id="pay-name" placeholder="Tu Nombre de Poder" style="width:100%; padding:12px; margin-bottom:10px; background:transparent; border:1px solid var(--border); color:white; border-radius:8px;">
-            <input type="text" placeholder="Código de Transacción (Tarjeta)" style="width:100%; padding:12px; margin-bottom:10px; background:transparent; border:1px solid var(--border); color:white; border-radius:8px;">
-            <button class="btn-main" style="width:100%;" onclick="confirmPayment()">PAGAR CON MUCHA FE</button>
-            <p onclick="togglePayment()" style="margin-top:20px; cursor:pointer; opacity:0.5;">Regresar</p>
-        </div>
-    </div>
-
-    <footer>
-        <div class="logo">ZYNTHEXA</div>
-        <div class="socials" style="margin: 20px 0;">
-            <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">YouTube</a>
-        </div>
-        <p style="opacity: 0.5; font-size: 0.8rem;">Marzo 2026 - El futuro te pertenece.</p>
+    <footer style="padding: 50px; text-align: center; opacity: 0.6; border-top: 1px solid var(--border);">
+        <p>ZYNTHEXA 2026 | Abundancia • Tecnología • Fe</p>
     </footer>
 
     <script>
-        // FAQ Logic
-        function toggleFaq(element) {
-            const item = element.parentElement;
-            item.classList.toggle('active');
-            const span = element.querySelector('span');
-            span.innerText = item.classList.contains('active') ? '-' : '+';
-        }
-
-        // Chat Logic
-        function toggleChat() {
-            const win = document.getElementById('chat-window');
-            win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function sendChatMsg() {
-            const input = document.getElementById('chat-input');
-            const content = document.getElementById('chat-content');
-            if(!input.value) return;
-
-            content.innerHTML += `<div class="msg msg-user">${input.value}</div>`;
-            const userMsg = input.value.toLowerCase();
-            input.value = "";
-
+        function runGen(type) {
+            const prompt = document.getElementById(type + '-prompt').value;
+            const prev = document.getElementById(type + '-prev');
+            if(!prompt) return alert("El universo requiere tu descripción.");
+            
+            prev.innerHTML = "Sintonizando frecuencias...";
             setTimeout(() => {
-                let resp = "Mi motor Gemini está procesando las posibilidades. En ZYNTHEXA, tu intención es nuestra orden.";
-                if(userMsg.includes("hola")) resp = "Hola, Visionario. ¿Listo para reclamar tu abundancia?";
-                if(userMsg.includes("precio")) resp = "El acceso Pro es de $9.99/mes. Una inversión pequeña para un retorno infinito.";
-                content.innerHTML += `<div class="msg msg-ai">${resp}</div>`;
-                content.scrollTop = content.scrollHeight;
-            }, 600);
+                if(type === 'img') {
+                    prev.style.background = `url('https://picsum.photos/400/300?sig=${Math.random()}') center/cover`;
+                } else {
+                    prev.style.background = `url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXF2Z3R4bmV4bmV4bmV4bmV4bmV4bmV4bmV4bmV4bmV4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxx6B3DDIu4/giphy.gif') center/cover`;
+                }
+                prev.innerHTML = "";
+                alert("¡Visión Generada con éxito!");
+            }, 2000);
         }
 
-        document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendChatMsg(); });
+        function toggleChat() {
+            const c = document.getElementById('chat-window');
+            c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
+        }
 
-        // Payment Logic
+        function chat() {
+            const i = document.getElementById('chat-in');
+            const b = document.getElementById('chat-box');
+            if(!i.value) return;
+            b.innerHTML += `<div style="text-align:right; margin: 5px 0;">${i.value}</div>`;
+            i.value = "";
+            setTimeout(() => {
+                b.innerHTML += `<div style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 10px;">Procesando tu intención en el núcleo...</div>`;
+                b.scrollTop = b.scrollHeight;
+            }, 500);
+        }
+
         function togglePayment() {
-            const m = document.getElementById('payment-modal');
-            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function confirmPayment() {
-            const name = document.getElementById('pay-name').value || "Visionario";
-            alert(`¡GRACIAS, ${name.toUpperCase()}! \n\nTu compra ha sido procesada con éxito y mucha fe. El universo ya está trabajando en tu visión.`);
-            togglePayment();
+            alert("Accediendo al Portal de Pago. Tu suscripción está bendecida por el éxito.");
         }
     </script>
 </body>
-</html>
+</html>ain
