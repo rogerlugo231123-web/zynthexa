@@ -1,164 +1,212 @@
-n class="btn-m<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZYNTHEXA | El Ecosistema Creativo del 2026</title>
+    <title>ZYNTHEXA | Sovereignty in Creation</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600;900&family=Rajdhani:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Outfit:wght@200;400;600&display=swap');
 
         :root {
-            --primary: #00e5ff;
-            --secondary: #8b5cf6;
-            --accent: #10b981;
-            --dark: #05000a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(0, 229, 255, 0.2);
+            --gold: #d4af37;
+            --deep: #0a0a0c;
+            --accent: #ffffff;
+            --panel: rgba(20, 20, 25, 0.8);
+            --border: rgba(212, 175, 55, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--dark); color: #fff; overflow-x: hidden; }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: var(--deep); 
+            color: #fff; 
+            overflow-x: hidden;
+        }
 
-        /* Fondo */
-        #bg-nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at center, #0a0118 0%, #020005 100%); }
+        /* Identidad Visual Propia: Fondo de Partículas de Oro */
+        #bg-vault {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at top right, #1a1a1e 0%, #0a0a0c 100%);
+        }
 
-        /* Navegación */
-        nav { position: fixed; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); z-index: 1000; }
-        .logo { font-family: 'Exo 2'; font-weight: 900; font-size: 2rem; color: var(--primary); text-decoration: none; }
+        /* Header Minimalista y Elegante */
+        nav { 
+            position: fixed; width: 100%; padding: 30px 5%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 1000; mix-blend-mode: difference;
+        }
+        .brand { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); }
 
-        /* Layout General */
-        section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .glow-text { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Exo 2'; font-weight: 900; }
+        /* HERO: El Manifiesto de ZYNTHEXA */
+        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 10%; }
+        .hero h1 { font-family: 'Syncopate'; font-size: clamp(2rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero p { max-width: 500px; font-weight: 200; font-size: 1.2rem; opacity: 0.7; border-left: 2px solid var(--gold); padding-left: 20px; }
 
-        /* GENERADORES IA */
-        .creator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 40px; }
-        .generator-card { background: var(--glass); border: 1px solid var(--border); border-radius: 25px; padding: 30px; backdrop-filter: blur(10px); transition: 0.4s; }
-        .generator-card:hover { border-color: var(--primary); }
-        .preview-box { width: 100%; height: 200px; background: rgba(0,0,0,0.3); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); color: var(--primary); overflow: hidden; }
-        .input-prompt { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 10px; color: white; margin-bottom: 15px; font-family: 'Rajdhani'; outline: none; resize: none; }
+        /* EL CENTRO DE MANDO (Tus Motores Propios) */
+        .vault-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 40px; padding: 100px 10%; 
+        }
+        .vault-card { 
+            background: var(--panel); border: 1px solid var(--border); 
+            padding: 40px; border-radius: 0px; /* Estilo cuadrado para verse más industrial/lujo */
+            transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .vault-card:hover { border-color: var(--gold); transform: translateY(-10px); background: #141417; }
+        
+        .engine-label { font-size: 0.7rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; display: block; }
+        
+        .output-screen { 
+            width: 100%; height: 250px; background: #000; margin: 20px 0;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
 
-        /* FAQ */
-        .faq-item { background: var(--glass); border: 1px solid var(--border); margin-bottom: 10px; border-radius: 12px; }
-        .faq-question { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; }
-        .faq-answer { padding: 0 15px; max-height: 0; overflow: hidden; transition: 0.3s; opacity: 0.8; }
-        .faq-item.active .faq-answer { max-height: 100px; padding-bottom: 15px; }
+        .input-prompt {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
+            padding: 15px 0; color: #fff; font-family: 'Outfit'; font-size: 1rem;
+            margin-bottom: 20px; outline: none; transition: 0.3s;
+        }
+        .input-prompt:focus { border-bottom-color: var(--gold); }
 
-        /* Botones */
-        .btn-main { padding: 12px 30px; border-radius: 50px; border: none; background: linear-gradient(45deg, var(--primary), var(--secondary)); color: var(--dark); font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
+        /* El Botón de Acción */
+        .btn-action {
+            background: transparent; border: 1px solid var(--gold); color: var(--gold);
+            padding: 15px 30px; cursor: pointer; font-family: 'Syncopate'; font-size: 0.7rem;
+            transition: 0.3s; width: 100%;
+        }
+        .btn-action:hover { background: var(--gold); color: #000; font-weight: 700; }
 
-        /* Chat */
-        #chat-window { position: fixed; bottom: 100px; right: 30px; width: 320px; height: 400px; background: rgba(5, 0, 10, 0.98); border: 1px solid var(--primary); border-radius: 20px; display: none; flex-direction: column; z-index: 10001; }
-        #chat-trigger { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: linear-gradient(45deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10001; font-size: 1.5rem; box-shadow: 0 0 20px var(--primary); }
+        /* SECCIÓN: MIS CREACIONES (La Galería que pediste) */
+        #creations { padding: 50px 10%; }
+        .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 30px; }
+        .gallery-item { height: 150px; background: var(--panel); border: 1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size: 0.6rem; opacity: 0.5;}
+
+        /* ASISTENTE PROPIO: "THE ORACLE" */
+        #oracle-ui {
+            position: fixed; bottom: 0; right: 50px; width: 350px; height: 500px;
+            background: #0d0d0f; border: 1px solid var(--gold); display: none;
+            flex-direction: column; z-index: 2000; box-shadow: 0 -20px 50px rgba(0,0,0,0.8);
+        }
+        #oracle-trigger {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            border: 1px solid var(--gold); display: flex; align-items: center;
+            justify-content: center; cursor: pointer; z-index: 2001; background: var(--deep);
+            color: var(--gold); font-family: 'Syncopate'; font-size: 0.6rem;
+        }
     </style>
 </head>
 <body>
 
-    <div id="bg-nebula"></div>
+    <div id="bg-vault"></div>
 
     <nav>
-        <a href="#" class="logo">ZYNTHEXA</a>
-        <button class="btn-main" onclick="togglePayment()" style="font-size: 0.8rem;">Suscribirse con Fe</button>
+        <div class="brand">ZYNTHEXA</div>
+        <div style="font-size: 0.7rem; letter-spacing: 2px;">FE • PODER • SÍNTESIS</div>
     </nav>
 
     <section class="hero">
-        <h1 class="glow-text" style="font-size: 4rem;">EL NÚCLEO CREATIVO</h1>
-        <p style="font-size: 1.2rem; opacity: 0.8;">Materializa videos y arte con el poder de Gemini 2026.</p>
-        <div style="margin-top: 30px; display: flex; gap: 15px;">
-            <button class="btn-main" onclick="document.getElementById('lab').scrollIntoView()">Ir al Laboratorio</button>
-            <button class="btn-main" style="background: transparent; border: 1px solid var(--primary); color: white;" onclick="document.getElementById('faq').scrollIntoView()">Ver FAQ</button>
-        </div>
+        <span style="color: var(--gold); margin-bottom: 10px; letter-spacing: 5px;">ESTÁNDAR 2026</span>
+        <h1>TU VOLUNTAD<br>DIGITALIZADA.</h1>
+        <p>ZYNTHEXA no es un asistente. Es el motor soberano que transmuta tus ideas en activos visuales de alto valor.</p>
     </section>
 
-    <section id="lab">
-        <h2 style="text-align: center; font-family: 'Exo 2'; margin-bottom: 40px;">Laboratorio de Manifestación Visual</h2>
-        <div class="creator-grid">
-            <div class="generator-card">
-                <h3 style="color: var(--primary); margin-bottom: 15px;">🎬 Vision Flow (Video)</h3>
-                <div class="preview-box" id="vid-prev">Esperando prompt de video...</div>
-                <textarea class="input-prompt" id="vid-prompt" rows="3" placeholder="Describe la escena de tus sueños..."></textarea>
-                <button class="btn-main" style="width: 100%;" onclick="runGen('vid')">Generar Video</button>
+    <div class="vault-grid">
+        <div class="vault-card">
+            <span class="engine-label">CORE: ETHER-VIDEO</span>
+            <h3>MANIFIESTO VISUAL</h3>
+            <div class="output-screen" id="out-video">
+                <span style="opacity:0.3; font-size: 0.7rem;">ESPERANDO SECUENCIA...</span>
             </div>
-            <div class="generator-card">
-                <h3 style="color: var(--secondary); margin-bottom: 15px;">🖼️ Nexus Art (Imagen)</h3>
-                <div class="preview-box" id="img-prev">Esperando prompt de imagen...</div>
-                <input type="text" class="input-prompt" id="img-prompt" placeholder="Ej: Paisaje galáctico en 8k...">
-                <button class="btn-main" style="width: 100%;" onclick="runGen('img')">Generar Imagen</button>
+            <input type="text" class="input-prompt" id="p-video" placeholder="Define la atmósfera...">
+            <button class="btn-action" onclick="activate('video')">EJECUTAR SÍNTESIS</button>
+        </div>
+
+        <div class="vault-card">
+            <span class="engine-label">CORE: AURA-IMAGE</span>
+            <h3>RETRATO DE REALIDAD</h3>
+            <div class="output-screen" id="out-image">
+                <span style="opacity:0.3; font-size: 0.7rem;">ESPERANDO COMPOSICIÓN...</span>
             </div>
-        </div>
-    </section>
-
-    <section id="faq">
-        <h2 style="text-align: center; margin-bottom: 40px; font-family: 'Exo 2';">Preguntas Frecuentes</h2>
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">¿Los videos son en alta resolución? <span>+</span></div>
-            <div class="faq-answer">Sí, el motor Vision Flow entrega resultados en 4K optimizados para la era del 2026.</div>
-        </div>
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">¿Cómo funciona la suscripción? <span>+</span></div>
-            <div class="faq-answer">Al suscribirte con fe, desbloqueas generaciones ilimitadas y soporte prioritario del Nexo.</div>
-        </div>
-    </section>
-
-    <div id="chat-window">
-        <div style="padding: 15px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;">
-            <span>NEXO GEMINI</span>
-            <span onclick="toggleChat()" style="cursor:pointer;">×</span>
-        </div>
-        <div id="chat-box" style="flex:1; padding: 15px; overflow-y: auto; font-size: 0.9rem;">
-            <div style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 10px;">Hola, soy tu asistente de ZYNTHEXA. ¿Qué vamos a manifestar hoy?</div>
-        </div>
-        <div style="padding: 10px; display: flex; gap: 5px;">
-            <input type="text" id="chat-in" placeholder="Escribe..." style="flex:1; background: transparent; border: 1px solid var(--border); color: white; padding: 5px; border-radius: 5px;">
-            <button onclick="chat()" style="background: var(--primary); border: none; border-radius: 5px; padding: 5px 10px;">↑</button>
+            <input type="text" class="input-prompt" id="p-image" placeholder="Describe la forma...">
+            <button class="btn-action" onclick="activate('image')">MATERIALIZAR</button>
         </div>
     </div>
-    <div id="chat-trigger" onclick="toggleChat()">✨</div>
 
-    <footer style="padding: 50px; text-align: center; opacity: 0.6; border-top: 1px solid var(--border);">
-        <p>ZYNTHEXA 2026 | Abundancia • Tecnología • Fe</p>
-    </footer>
+    <section id="creations">
+        <span class="engine-label">ARCHIVO DE PROPIEDAD</span>
+        <h2 style="font-family: 'Syncopate'; font-size: 1.5rem;">MIS MANIFESTACIONES</h2>
+        <div class="gallery" id="gallery-box">
+            <div class="gallery-item">ARCHIVO_001.MP4</div>
+            <div class="gallery-item">ARCHIVO_002.PNG</div>
+            <div class="gallery-item">ARCHIVO_003.MP4</div>
+            <div class="gallery-item">VACÍO</div>
+        </div>
+    </section>
+
+    <div id="oracle-ui">
+        <div style="padding:20px; border-bottom:1px solid var(--gold); font-family:'Syncopate'; font-size:0.7rem; color:var(--gold);">ORACLE_Z</div>
+        <div id="chat-logs" style="flex:1; padding:20px; overflow-y:auto; font-size:0.8rem; font-weight:200;">
+            Sistemas ZYNTHEXA activos. Tu visión es nuestra única ley.
+        </div>
+        <div style="padding:20px; display:flex;">
+            <input type="text" id="chat-in" placeholder="Comando..." style="flex:1; background:transparent; border:none; border-bottom:1px solid var(--gold); color:#fff; outline:none;">
+            <button onclick="talk()" style="background:transparent; color:var(--gold); border:none; margin-left:10px; cursor:pointer;">>>></button>
+        </div>
+    </div>
+    <div id="oracle-trigger" onclick="toggleOracle()">Z_</div>
 
     <script>
-        function runGen(type) {
-            const prompt = document.getElementById(type + '-prompt').value;
-            const prev = document.getElementById(type + '-prev');
-            if(!prompt) return alert("El universo requiere tu descripción.");
+        // Función de Activación de Motores Propios
+        function activate(type) {
+            const prompt = document.getElementById('p-' + type).value;
+            const screen = document.getElementById('out-' + type);
+            const gallery = document.getElementById('gallery-box');
+
+            if(!prompt) return;
+
+            screen.innerHTML = `<span style="color:var(--gold); font-size:0.7rem;">TRANSFORMANDO MATERIA...</span>`;
             
-            prev.innerHTML = "Sintonizando frecuencias...";
             setTimeout(() => {
-                if(type === 'img') {
-                    prev.style.background = `url('https://picsum.photos/400/300?sig=${Math.random()}') center/cover`;
+                if(type === 'video') {
+                    screen.innerHTML = `<video autoplay loop muted style="width:100%"><source src="https://assets.mixkit.co/videos/preview/mixkit-top-view-of-a-blue-swirling-ocean-4424-large.mp4" type="video/mp4"></video>`;
                 } else {
-                    prev.style.background = `url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXF2Z3R4bmV4bmV4bmV4bmV4bmV4bmV4bmV4bmV4bmV4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxx6B3DDIu4/giphy.gif') center/cover`;
+                    screen.innerHTML = `<img src="https://picsum.photos/600/400?grayscale&sig=${Math.random()}" style="width:100%">`;
                 }
-                prev.innerHTML = "";
-                alert("¡Visión Generada con éxito!");
-            }, 2000);
+                
+                // Añadir a la galería de "Mis Creaciones"
+                const newItem = document.createElement('div');
+                newItem.className = 'gallery-item';
+                newItem.style.opacity = "1";
+                newItem.style.borderColor = "var(--gold)";
+                newItem.innerHTML = `<a href="#" style="color:var(--gold); text-decoration:none;">DESCARGAR_${type.toUpperCase()}</a>`;
+                gallery.prepend(newItem);
+
+                alert("SÍNTESIS COMPLETADA. El archivo ha sido depositado en tu archivo de propiedad.");
+            }, 3000);
         }
 
-        function toggleChat() {
-            const c = document.getElementById('chat-window');
-            c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
+        function toggleOracle() {
+            const ui = document.getElementById('oracle-ui');
+            ui.style.display = (ui.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        function chat() {
-            const i = document.getElementById('chat-in');
-            const b = document.getElementById('chat-box');
-            if(!i.value) return;
-            b.innerHTML += `<div style="text-align:right; margin: 5px 0;">${i.value}</div>`;
-            i.value = "";
+        function talk() {
+            const input = document.getElementById('chat-in');
+            const logs = document.getElementById('chat-logs');
+            if(!input.value) return;
+
+            logs.innerHTML += `<div style="margin-top:15px; color:var(--gold);">>> USER: ${input.value}</div>`;
+            const val = input.value.toLowerCase();
+            input.value = "";
+
             setTimeout(() => {
-                b.innerHTML += `<div style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 10px;">Procesando tu intención en el núcleo...</div>`;
-                b.scrollTop = b.scrollHeight;
-            }, 500);
-        }
-
-        function togglePayment() {
-            alert("Accediendo al Portal de Pago. Tu suscripción está bendecida por el éxito.");
+                let r = "Analizando flujos de datos... Tu solicitud está siendo procesada por el núcleo Z.";
+                if(val.includes("hola")) r = "Bienvenido a la soberanía digital, Visionario.";
+                logs.innerHTML += `<div style="margin-top:10px; opacity:0.6;">>> ZYNTHEXA: ${r}</div>`;
+                logs.scrollTop = logs.scrollHeight;
+            }, 800);
         }
     </script>
 </body>
-</html>ain
+</html>
